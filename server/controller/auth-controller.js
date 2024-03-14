@@ -46,13 +46,14 @@ const logINuser = async(req, resp) =>{
       return resp.status(404).json({success:false, msg:"password not match"})
     }
      
-    const token = await JWT.sign({id:userD._id, email:userD.uemail, name:userD.uname, isAdmin:userD.isAdmin}, secretKey,{expiresIn:"7d"})
+    const token = await JWT.sign({id:userD._id, email:userD.uemail, name:userD.uname, isAdmin:userD.role}, secretKey,{expiresIn:"7d"})
 
 
     resp.status(200).json({success:true, msg:"LogIN Successfully ..", token, userData:{
       name:userD.uname,
       email:userD.uemail,
-      mobile:userD.uMobile
+      mobile:userD.uMobile,
+      role:userD.role
     } })
     
   } catch (error) {
